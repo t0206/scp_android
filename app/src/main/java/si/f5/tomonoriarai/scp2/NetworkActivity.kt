@@ -33,14 +33,15 @@ class NetworkActivity : AppCompatActivity() {
 
         requestButton.setOnClickListener{
             runBlocking (Dispatchers.IO){
-                kotlin.runCatching {
+                runCatching {
                     userService.getUser("lifeistech")
-                }.onSuccess {
-                    nameTextView.text = it.name
-                    userIdTextView.text = it.userId
-                }.onFailure {
-                    Toast.makeText(applicationContext, "Failed", Toast.LENGTH_SHORT).show()
                 }
+            }.onSuccess {
+                nameTextView.text = it.name
+                userIdTextView.text = it.userId
+            }.onFailure {
+                println("errorrrrrr")
+                Toast.makeText(applicationContext, "Failed", Toast.LENGTH_SHORT).show()
             }
         }
     }
